@@ -16,11 +16,8 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 500)
 warnings.filterwarnings('ignore')
 
-from google.colab import drive
-drive.mount('/content/drive')
-import pandas as pd
-dosya_yolu = '/content/drive/MyDrive/finaldata.csv'
-df = pd.read_csv(dosya_yolu)
+
+df = pd.read_csv("employee_data.csv")
 
 """# Keşifçi Veri Analizi
 
