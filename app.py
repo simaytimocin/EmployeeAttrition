@@ -9,6 +9,7 @@ Original file is located at
 
 
 
+
 import pickle
 import numpy as np
 import streamlit as st
@@ -20,7 +21,7 @@ features = pickle.load(open("xgb_features.pkl", 'rb'))
 
 # Kullanıcı arayüzü için Streamlit kullan
 st.title("Çalışan Ayrılma Tahmin Uygulaması")
-st.write("Bu uygulama çalışan ayrılma durumunu tahmin eder.")
+st.write("Bu uygulama, bir çalışanın şirkette kalıp kalmayacağını tahmin eder.")
 
 # Kullanıcıdan girdi al
 input_data = []
@@ -39,4 +40,3 @@ if st.button("Tahmin Et"):
         st.write("Çalışanın ayrılması muhtemel.")
     else:
         st.write("Çalışan muhtemelen şirkette kalacak.")
-
