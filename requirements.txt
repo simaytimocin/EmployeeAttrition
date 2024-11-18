@@ -1,0 +1,14 @@
+streamlit
+numpy
+pandas
+matplotlib
+seaborn
+plotly
+scipy
+scikit-learn
+xgboost
+graphviz
+lightgbm
+tqdm
+imblearn
+pickle
