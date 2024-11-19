@@ -2,19 +2,28 @@ import pickle
 import numpy as np
 import pandas as pd
 import streamlit as st
-
+import streamlit.components.v1 as components
 
 model = pickle.load(open("xgb_model.pkl", 'rb'))
 scaler = pickle.load(open("mm_scaler.pkl", 'rb'))
 features = pickle.load(open("xgb_features.pkl", 'rb'))
 
 def attrition():
-    st.title("Employee Attrition Prediction App")
+    st.set_page_config(page_title="Employee Attrition Prediction", page_icon="💼", layout="wide")
+    st.title("💼 Employee Attrition Prediction App")
+    st.markdown("""
+    <style>
+    .stApp {
+        background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+        background-size: cover;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-    with st.form("attrition_form"):
+    st.sidebar.header("Employee Details Form")
 
-        st.header("Employee Details")
-
+    with st.sidebar.form("attrition_form"):
+        st.markdown("**Please fill in the employee details below:**")
         
         age = st.number_input("Age", min_value=18, max_value=80, help="18-80")
         business_travel = st.radio("Business Travel", ["Rarely", "Frequently", "No Travel"])
@@ -46,10 +55,9 @@ def attrition():
         years_since_last_promotion = st.number_input("Years Since Last Promotion", min_value=0, max_value=15, help="0-15")
         years_with_curr_manager = st.number_input("Years With Current Manager", min_value=0, max_value=17, help="0-17")
 
-        submitted = st.form_submit_button("Predict Attrition")
+        submitted = st.form_submit_button("Predict Attrition", help="Click to predict employee attrition")
 
     if submitted:
-        
         input_data = {
             "Age": age,
             "BusinessTravel": business_travel,
@@ -80,7 +88,6 @@ def attrition():
 
         df = pd.DataFrame([input_data])
 
-        
         df['Total_Satisfaction'] = (df['EnvironmentSatisfaction'] +
                                     df['JobInvolvement'] +
                                     df['JobSatisfaction'] +
@@ -89,23 +96,41 @@ def attrition():
         df.drop(['EnvironmentSatisfaction', 'JobInvolvement', 'JobSatisfaction', 'RelationshipSatisfaction',
                  'WorkLifeBalance'], axis=1, inplace=True)
 
-        
         df = pd.get_dummies(df)
 
-        
         df = df.reindex(columns=features, fill_value=0)
 
-        
         df_scaled = scaler.transform(df)
 
-        
         prediction = model.predict(df_scaled)
 
+        st.markdown("""
+        <div style="text-align: center;">
+            <h2>Prediction Result</h2>
+        </div>
+        """, unsafe_allow_html=True)
         
         if prediction[0] == 1:
-            st.write("Attrition Predicted: Yes")
+            st.success("Attrition Predicted: Yes", icon="⚠️")
+            st.markdown("**The model predicts that the employee is likely to leave the company.**")
         else:
-            st.write("Attrition Predicted: No")
+            st.success("Attrition Predicted: No", icon="✅")
+            st.markdown("**The model predicts that the employee is likely to stay with the company.**")
 
+    components.html("""
+    <style>
+    .stButton button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 24px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    .stButton button:hover {
+        background-color: #45a049;
+    }
+    </style>
+    """)
 
 attrition()
