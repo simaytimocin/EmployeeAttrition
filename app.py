@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def attrition():
-    model = pickle.load(open('Models/xgb_model.pkl', 'rb'))
+    model = pickle.load(open('xgb_model.pkl', 'rb'))
     st.title("Employee Attrition Prediction App")
 
     with st.form("attrition_form"):
