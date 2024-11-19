@@ -30,7 +30,7 @@ def attrition():
         distance_from_home = st.number_input("Eve Uzaklık", min_value=1, max_value=29, help="1-29")
         education = st.radio("Eğitim Seviyesi", [1, 2, 3, 4, 5])
         education_field = st.selectbox("Eğitim Alanı", [
-            "Yaşam Bilimleri", "Tıp", "Pazarlama", "Teknik Derece", "İnsan Kaynakları", "Diğer"])
+            "Fen Bilimleri", "Tıp", "Pazarlama", "Teknik Derece", "İnsan Kaynakları", "Diğer"])
         environment_satisfaction = st.radio("Çevre Memnuniyeti", [1, 2, 3, 4])
         gender = st.radio("Cinsiyet", ["Erkek", "Kadın"])
         job_involvement = st.number_input("İşe Katılım", min_value=1, max_value=4, help="1-4")
