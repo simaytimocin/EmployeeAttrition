@@ -2,7 +2,6 @@ import pickle
 import numpy as np
 import pandas as pd
 import streamlit as st
-import streamlit.components.v1 as components
 
 model = pickle.load(open("xgb_model.pkl", 'rb'))
 scaler = pickle.load(open("mm_scaler.pkl", 'rb'))
@@ -117,7 +116,7 @@ def attrition():
             st.success("Ayrılma Tahmini: Hayır", icon="✅")
             st.markdown("**Model, çalışanın şirkette kalma ihtimalinin yüksek olduğunu tahmin ediyor.**")
 
-    components.html("""
+    st.markdown("""
     <style>
     .stButton button {
         background-color: #4CAF50;
