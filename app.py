@@ -101,7 +101,6 @@ def attrition():
 
         df_scaled = scaler.transform(df)
 
-        prediction_proba = model.predict_proba(df_scaled)
         prediction = model.predict(df_scaled)
 
         st.markdown("""
@@ -111,10 +110,10 @@ def attrition():
         """, unsafe_allow_html=True)
         
         if prediction[0] == 1:
-            st.success(f"Ayrılma Tahmini: Evet (Olasılık: %{prediction_proba[0][1] * 100:.2f})", icon="⚠️")
+            st.success("Ayrılma Tahmini: Evet", icon="⚠️")
             st.markdown("**Model, çalışanın şirketten ayrılma ihtimalinin yüksek olduğunu tahmin ediyor.**")
         else:
-            st.success(f"Ayrılma Tahmini: Hayır (Olasılık: %{prediction_proba[0][0] * 100:.2f})", icon="✅")
+            st.success("Ayrılma Tahmini: Hayır", icon="✅")
             st.markdown("**Model, çalışanın şirkette kalma ihtimalinin yüksek olduğunu tahmin ediyor.**")
 
     st.markdown("""
