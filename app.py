@@ -5,9 +5,10 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
 def attrition():
-    # Model ve scaler yüklenmesi
+    # Model, scaler ve özelliklerin yüklenmesi
     model = pickle.load(open('xgb_model.pkl', 'rb'))
     scaler = pickle.load(open('mm_scaler.pkl', 'rb'))
+    features = pickle.load(open('xgb_features.pkl', 'rb'))
     
     st.title("Çalışan Terk Tahmin Uygulaması")
 
@@ -91,8 +92,7 @@ def attrition():
         df = pd.get_dummies(df)
 
         # Eksik kolonları tamamlamak için reindex
-        required_columns = scaler.feature_names_in_
-        df = df.reindex(columns=required_columns, fill_value=0)
+        df = df.reindex(columns=features, fill_value=0)
 
         # Veriyi ölçekleme
         df_scaled = scaler.transform(df)
