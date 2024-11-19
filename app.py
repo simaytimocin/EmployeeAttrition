@@ -25,13 +25,12 @@ def attrition():
         st.markdown("**Lütfen aşağıdaki çalışan bilgilerini doldurun:**")
         
         age = st.number_input("Yaş", min_value=18, max_value=80, help="18-80")
-        business_travel = st.radio("İş Seyahati", ["Nadiren", "Sıkça", "Seyahat Yok"])
+        business_travel = st.radio("İŞ Seyahati", ["Nadiren", "Sıkça", "Seyahat Yok"])
         department = st.radio("Departman", ["Araştırma & Geliştirme", "İnsan Kaynakları", "Satış"])
         distance_from_home = st.number_input("Eve Uzaklık", min_value=1, max_value=29, help="1-29")
         education = st.radio("Eğitim Seviyesi", [1, 2, 3, 4, 5])
-        education_field = st.selectbox("Eğitim Alanı", [
+        education_field = st.selectbox("Çalışan Bilgileri Formu", [
             "Fen Bilimleri", "Tıp", "Pazarlama", "Teknik Derece", "İnsan Kaynakları", "Diğer"])
-        environment_satisfaction = st.radio("Çevre Memnuniyeti", [1, 2, 3, 4])
         gender = st.radio("Cinsiyet", ["Erkek", "Kadın"])
         job_involvement = st.number_input("İşe Katılım", min_value=1, max_value=4, help="1-4")
         job_level = st.number_input("İş Seviyesi", min_value=1, max_value=5, help="1-5")
@@ -64,7 +63,6 @@ def attrition():
             "DistanceFromHome": distance_from_home,
             "Education": education,
             "EducationField": education_field,
-            "EnvironmentSatisfaction": environment_satisfaction,
             "Gender": gender,
             "JobInvolvement": job_involvement,
             "JobLevel": job_level,
@@ -86,14 +84,6 @@ def attrition():
         }
 
         df = pd.DataFrame([input_data])
-
-        df['Total_Satisfaction'] = (df['EnvironmentSatisfaction'] +
-                                    df['JobInvolvement'] +
-                                    df['JobSatisfaction'] +
-                                    df['RelationshipSatisfaction'] +
-                                    df['WorkLifeBalance']) / 5
-        df.drop(['EnvironmentSatisfaction', 'JobInvolvement', 'JobSatisfaction', 'RelationshipSatisfaction',
-                 'WorkLifeBalance'], axis=1, inplace=True)
 
         df = pd.get_dummies(df)
 
