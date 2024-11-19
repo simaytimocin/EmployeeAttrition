@@ -1,3 +1,7 @@
+import pickle
+import streamlit as st
+import pandas as pd
+
 def attrition():
     st.set_page_config(page_title="Çalışan Ayrılma Tahmini", page_icon="💼", layout="wide")
     st.title("💼 Çalışan Ayrılma Tahmin Uygulaması")
