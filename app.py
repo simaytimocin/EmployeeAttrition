@@ -87,11 +87,7 @@ def attrition():
 
         df = pd.DataFrame([input_data])
 
-        df['Total_Satisfaction'] = (df['EnvironmentSatisfaction'] +
-                                    df['JobInvolvement'] +
-                                    df['JobSatisfaction'] +
-                                    df['RelationshipSatisfaction'] +
-                                    df['WorkLifeBalance']) / 5
+        # 'Total_Satisfaction' hesaplamasını kaldırdım.
         df.drop(['EnvironmentSatisfaction', 'JobInvolvement', 'JobSatisfaction', 'RelationshipSatisfaction',
                  'WorkLifeBalance'], axis=1, inplace=True)
 
@@ -133,3 +129,4 @@ def attrition():
     """, unsafe_allow_html=True)
 
 attrition()
+
